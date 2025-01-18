@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileMAUI_2"
+             xmlns:pages="clr-namespace:MobileMAUI_2.Pages"
+             x:Class="MobileMAUI_2.Pages.FriendPage">
+
+    <StackLayout Padding="10">
+        <!-- Add Friend Button -->
+        <Button Text="Add Friend" Clicked="OnAddFriendClicked" />
+
+        <!-- Form for Add/Edit Friend -->
+        <Frame IsVisible="False" x:Name="FriendFormFrame" Padding="10">
+            <StackLayout>
+                <Entry x:Name="NameEntry" Placeholder="Name" />
+                <Entry x:Name="PhoneEntry" Placeholder="Phone" />
+                <Entry x:Name="DescriptionEntry" Placeholder="Description" />
+                <Button Text="Save" Clicked="OnSaveClicked" />
+                <Button Text="Cancel" Clicked="OnCancelClicked" />
+            </StackLayout>
+        </Frame>
+
+        <!-- CollectionView for displaying friends -->
+        <CollectionView x:Name="FriendsCollectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Name}" FontSize="20" />
+                        <Label Text="{Binding Phone}" FontSize="14" />
+                        <Label Text="{Binding Description}" FontSize="15" TextColor="Gray" />
+                        <HorizontalStackLayout Padding="10" Spacing="10">
+                            <Button Text="Edit" Clicked="OnEditClicked" />
+                            <Button Text="Delete" Clicked="OnDeleteClicked" />
+                        </HorizontalStackLayout>
+                        
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

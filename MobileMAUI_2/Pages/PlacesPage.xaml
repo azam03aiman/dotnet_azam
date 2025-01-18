@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileMAUI_2"
+             xmlns:pages="clr-namespace:MobileMAUI_2.Pages"
+             x:Class="MobileMAUI_2.Pages.PlacesPage">
+
+    <StackLayout Padding="10">
+        <!-- Add Place Button -->
+        <Button Text="Add Place" Clicked="OnAddPlaceClicked" />
+
+        <!-- Form for Add/Edit Place -->
+        <Frame IsVisible="False" x:Name="PlaceFormFrame" Padding="10">
+            <StackLayout>
+                <Entry x:Name="PlaceNameEntry" Placeholder="Place Name" />
+                <Entry x:Name="CityEntry" Placeholder="City" />
+                <Entry x:Name="DescriptionEntry" Placeholder="Description" />
+                <Button Text="Save" Clicked="OnSavePlaceClicked" />
+                <Button Text="Cancel" Clicked="OnCancelPlaceClicked" />
+            </StackLayout>
+        </Frame>
+
+        <!-- CollectionView for displaying places -->
+        <CollectionView x:Name="PlacesCollectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Name}" FontSize="20" />
+                        <Label Text="{Binding City}" FontSize="14" />
+                        <Label Text="{Binding Description}" FontSize="12" TextColor="Gray" />
+                        <!-- Description -->
+                        <Button Text="Edit" Clicked="OnEditPlaceClicked" />
+                        <Button Text="Delete" Clicked="OnDeletePlaceClicked" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

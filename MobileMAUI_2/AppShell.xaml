@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MobileMAUI_2.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MobileMAUI_2"
+    xmlns:pages="clr-namespace:MobileMAUI_2.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Title="MobileMAUI_2">
+
+    <FlyoutItem Title="Home">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Friends">
+        <ShellContent
+            Title="Friends"
+            ContentTemplate="{DataTemplate pages:FriendPage}"
+            Route="Pages.FriendPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Food">
+        <ShellContent
+            Title="Food"
+            ContentTemplate="{DataTemplate pages:FoodPage}"
+            Route="Pages.FoodPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Places">
+        <ShellContent
+            Title="Places"
+            ContentTemplate="{DataTemplate pages:PlacesPage}"
+            Route="Pages.PlacesPage" />
+    </FlyoutItem>
+
+</Shell>

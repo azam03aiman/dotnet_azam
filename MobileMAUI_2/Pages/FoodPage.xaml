@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MobileMAUI_2"
+             xmlns:pages="clr-namespace:MobileMAUI_2.Pages"
+             x:Class="MobileMAUI_2.Pages.FoodPage">
+
+    <StackLayout Padding="10">
+        <!-- Add Food Button -->
+        <Button Text="Add Food" Clicked="OnAddFoodClicked" />
+
+        <!-- Form for Add/Edit Food -->
+        <Frame IsVisible="False" x:Name="FoodFormFrame" Padding="10">
+            <StackLayout Padding="10">
+                <Entry x:Name="FoodNameEntry" Placeholder="Food Name" />
+                <Entry x:Name="FoodDescriptionEntry" Placeholder="Description" />
+                <Entry x:Name="RatingEntry" Placeholder="Rating (1-5)" Keyboard="Numeric" />
+                <Button Text="Save" Padding="10" Clicked="OnSaveFoodClicked" />
+                <Button Text="Cancel" Padding="10" Clicked="OnCancelFoodClicked" />
+            </StackLayout>
+        </Frame>
+
+        <!-- CollectionView for displaying food -->
+        <CollectionView x:Name="FoodCollectionView"
+                        SelectionMode="Single"
+                        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10">
+                        <Label Text="{Binding Name}" FontSize="20" />
+                        <Label Text="{Binding Description}" FontSize="12" TextColor="Gray" />
+                        <!-- Description -->
+                        <Label Text="{Binding Rating}" FontSize="14" />
+                        <Button Text="Edit" Clicked="OnEditFoodClicked" Margin="20"/>
+                        <Button Text="Delete" Clicked="OnDeleteFoodClicked" Margin="20" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
