@@ -1,0 +1,37 @@
+﻿@model FriendsApp.Models.Post
+
+@{
+    ViewData["Title"] = "Create Post";
+}
+
+<h1>Create Post</h1>
+
+<!-- Display any model validation errors -->
+<div class="alert alert-danger" role="alert">
+    @Html.ValidationSummary(true, "Please fix the errors below.", new { @class = "text-danger" })
+</div>
+
+<form asp-action="Create" method="post">
+    <!-- Title Field -->
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <!-- Content Field -->
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" class="form-control" required placeholder="Write your post content here..."></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Post</button>
+</form>
+
+<!-- Include validation scripts -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

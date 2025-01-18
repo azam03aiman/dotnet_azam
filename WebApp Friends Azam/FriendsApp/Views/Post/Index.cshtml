@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FriendsApp.Models.Post>
+
+@{
+    ViewData["Title"] = "Posts";
+}
+
+<h1>Posts</h1>
+
+@foreach (var post in Model)
+{
+    <div class="post">
+        <h2>@post.Title</h2>
+        <p>@post.Content</p>
+        <p><small>Posted on @post.CreatedAt.ToString("g")</small></p>
+        <a asp-action="Details" asp-route-id="@post.PostId">View Details</a>
+
+        @if (User.Identity.Name == post.User.Name)
+        {
+            <a asp-action="Edit" asp-route-id="@post.PostId">Edit</a>
+            <a asp-action="Delete" asp-route-id="@post.PostId">Delete</a>
+        }
+    </div>
+}

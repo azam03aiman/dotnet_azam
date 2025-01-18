@@ -1,0 +1,59 @@
+﻿@model FriendsApp.Models.Post
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Post Details";
+}
+
+<h1>@Model.Title</h1>
+<p>@Model.Content</p>
+<p><small>Posted by @Model.User.Name on @Model.CreatedAt.ToString("g")</small></p>
+
+<!-- Display Comments Section -->
+<h3>Comments</h3>
+<div>
+    @if (Model.Comments != null && Model.Comments.Any())
+    {
+        foreach (var comment in Model.Comments)
+        {
+            <div>
+                <p>@comment.Content</p>
+                <p><small>Commented by @comment.User.Name on @comment.CreatedAt.ToString("g")</small></p>
+
+                <!-- Edit/Delete buttons for the comment -->
+                @if (User.Identity.IsAuthenticated)
+                {
+                    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                    if (int.TryParse(currentUserId, out int userId) && comment.UserId == userId)
+                    {
+                        <div>
+                            <!-- Change the action to "Comment/Edit" instead of "Post/Edit" -->
+                            <a asp-action="Edit" asp-controller="Comment" asp-route-id="@comment.CommentId">Edit</a>
+
+                            <form method="post" asp-action="Delete" asp-controller="Comment" asp-route-id="@comment.CommentId" onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <p>No comments yet. Be the first to comment!</p>
+    }
+</div>
+
+<!-- Add a comment if the user is authenticated -->
+@if (User.Identity.IsAuthenticated)
+{
+    <h3>Add a Comment</h3>
+    <form asp-action="Create" asp-controller="Comment" asp-route-postId="@Model.PostId" method="post">
+        <textarea name="Content" placeholder="Write your comment here..." class="form-control" required></textarea>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+    </form>
+}
+
+<a asp-action="Index">Back to Posts</a>
