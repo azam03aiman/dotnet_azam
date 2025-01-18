@@ -1,0 +1,39 @@
+﻿@model List<Friends_Web_App.Models.Hobby>
+
+<h1>List of Hobbies</h1>
+
+<a asp-controller="Hobby" asp-action="Add" class="btn btn-primary">Add Hobby</a>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <!--Table row-->
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hobby in Model)
+        {
+            <tr>
+                <td>@hobby.HobbyId</td>
+                <td>@hobby.Name</td>
+                <td>@hobby.Description</td>
+                <td>@hobby.rating</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a asp-controller="Hobby" asp-action="Edit" class="btn btn-primary" asp-route-id="@hobby.HobbyId">Edit</a>
+                        <form asp-controller="Hobby" asp-action="Delete" asp-route-id="@hobby.HobbyId" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

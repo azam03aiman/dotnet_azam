@@ -1,0 +1,39 @@
+﻿@model List<Friends_Web_App.Models.BucketList>
+
+<h1>Bucket List</h1>
+
+<a asp-controller="BucketList" asp-action="Add" class="btn btn-primary">Add Bucket List Item</a>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BucketListId</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.rating</td>
+                <td>@item.status</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a asp-controller="BucketList" asp-action="Edit" class="btn btn-primary" asp-route-id="@item.BucketListId">Edit</a>
+                        <form asp-controller="BucketList" asp-action="Delete" asp-route-id="@item.BucketListId" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

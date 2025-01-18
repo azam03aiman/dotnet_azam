@@ -1,0 +1,39 @@
+﻿@model List<Friends_Web_App.Models.FoodViewModel>
+
+<h1>List of Food</h1>
+
+<a asp-controller="Food" asp-action="Add" class="btn btn-primary">Add Food</a>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <!--Table row-->
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Rating</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var food in Model)
+        {
+            <tr>
+                <td>@food.Id</td>
+                <td>@food.Name</td>
+                <td>@food.Description</td>
+                <td>@food.rating</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a asp-controller="Food" asp-action="Edit" class="btn btn-primary" asp-route-id="@food.Id">Edit</a>
+                        <form asp-controller="Food" asp-action="Delete" asp-route-id="@food.Id" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

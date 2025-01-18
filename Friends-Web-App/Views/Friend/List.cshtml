@@ -1,0 +1,45 @@
+﻿@model List<Friends_Web_App.Models.Friend>
+
+<h1>This is Friends Page</h1>
+
+<a asp-controller="Friend" asp-action="Add" class="btn btn-primary">Add Friend</a>
+<br />
+
+<table class="table">
+    <thead>
+        <tr> <!--Table row-->
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Year</th>
+            <th>Phone</th>
+            <th>Hometown</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var friend in Model)
+        {
+            <tr>
+                <td>@friend.Id</td>
+                <td>@friend.Name</td>
+                <td>@friend.age</td>
+                <td>@friend.Gender</td>
+                <td>@friend.Year</td>
+                <td>@friend.Phone</td>
+                <td>@friend.hometown</td>
+                <td>@friend.Description</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a asp-controller="Friend" asp-action="Edit" class="btn btn-primary" asp-route-id="@friend.Id">Edit</a>
+                        <form asp-controller="Friend" asp-action="Delete" asp-route-id="@friend.Id" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

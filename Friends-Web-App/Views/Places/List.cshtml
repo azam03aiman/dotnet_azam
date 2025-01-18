@@ -1,0 +1,36 @@
+﻿@model List<Friends_Web_App.Models.Places>
+
+<h1>List of Places</h1>
+
+<a asp-controller="Places" asp-action="Add" class="btn btn-primary">Add Places</a>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var place in Model)
+        {
+            <tr>
+                <td>@place.PlacesId</td>
+                <td>@place.Name</td>
+                <td>@place.Description</td>
+                <td>@place.Negeri</td>
+                <td>
+                    <div class="d-flex justify-content-center">
+                        <a asp-controller="Places" asp-action="Edit" class="btn btn-primary" asp-route-id="@place.PlacesId">Edit</a>
+                        <form asp-controller="Places" asp-action="Delete" asp-route-id="@place.PlacesId" method="post">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
